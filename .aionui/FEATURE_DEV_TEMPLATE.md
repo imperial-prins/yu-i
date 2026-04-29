@@ -1,144 +1,144 @@
-# AionUi 功能开发规范模板
+# AionUi Feature Development Specification Template
 
-> 本模板用于规范化向 AI 描述功能开发需求，确保 AI 能够准确理解任务并遵循项目约定。
-
----
-
-## 1. 功能概述
-
-### 1.1 基本信息
-
-- **功能名称**: [简洁命名]
-- **所属模块**: [ ] Agent层 [ ] 对话系统 [ ] 预览系统 [ ] 设置系统 [ ] 工作区 [ ] 其他
-- **涉及进程**: [ ] 主进程(process) [ ] 渲染进程(renderer) [ ] WebServer [ ] Worker
-
-### 1.2 功能描述
-
-[用 1-3 句话描述功能的核心目的和价值]
-
-### 1.3 用户场景
-
-```
-触发: [用户如何触发此功能]
-过程: [系统如何响应]
-结果: [功能完成后的状态]
-```
-
-### 1.4 数据流
-
-| 方向 | 数据类型 | 说明 |
-| ---- | -------- | ---- |
-| 输入 |          |      |
-| 输出 |          |      |
+> This template standardizes how feature development requirements are described to AI, ensuring the AI can accurately understand the task and follow project conventions.
 
 ---
 
-## 2. 开发规范
+## 1. Feature Overview
 
-### 2.1 技术栈约束
+### 1.1 Basic Information
 
-- **框架**: Electron 37 + React 19 + TypeScript 5.8
-- **UI库**: Arco Design (@arco-design/web-react)
-- **图标**: Icon Park (@icon-park/react)
-- **CSS**: UnoCSS 原子化样式
-- **状态管理**: React Context (AuthContext / ConversationContext / ThemeContext / LayoutContext)
-- **IPC通信**: @office-ai/platform bridge 系统
-- **国际化**: i18next + react-i18next
-- **数据库**: better-sqlite3
+- **Feature Name**: [concise name]
+- **Module**: [ ] Agent Layer [ ] Conversation System [ ] Preview System [ ] Settings System [ ] Workspace [ ] Other
+- **Processes Involved**: [ ] Main Process (process) [ ] Renderer Process (renderer) [ ] WebServer [ ] Worker
 
-### 2.2 命名规范
+### 1.2 Feature Description
 
-| 类型         | 规范                  | 示例                                            |
-| ------------ | --------------------- | ----------------------------------------------- |
-| React 组件   | PascalCase            | `MessageList.tsx`, `FilePreview.tsx`            |
-| Hooks        | use 前缀 + PascalCase | `useAutoScroll.ts`, `useColorScheme.ts`         |
-| Bridge 文件  | 功能名 + Bridge       | `conversationBridge.ts`, `databaseBridge.ts`    |
-| Service 文件 | 功能名 + Service      | `WebuiService.ts`                               |
-| 接口类型     | I 前缀                | `ICreateConversationParams`, `IResponseMessage` |
-| 类型别名     | T 前缀或直接命名      | `TChatConversation`, `PresetAgentType`          |
-| 常量         | UPPER_SNAKE_CASE      | `MAX_RETRY_COUNT`                               |
-| 工具函数     | camelCase             | `formatMessage`, `parseResponse`                |
+[Describe the core purpose and value of the feature in 1–3 sentences]
 
-### 2.3 文件位置规范
+### 1.3 User Scenario
 
 ```
-新增文件应放置于对应目录:
+Trigger: [how the user triggers this feature]
+Process: [how the system responds]
+Result:  [state after the feature completes]
+```
+
+### 1.4 Data Flow
+
+| Direction | Data Type | Description |
+| --------- | --------- | ----------- |
+| Input     |           |             |
+| Output    |           |             |
+
+---
+
+## 2. Development Standards
+
+### 2.1 Tech Stack Constraints
+
+- **Framework**: Electron 37 + React 19 + TypeScript 5.8
+- **UI Library**: Arco Design (@arco-design/web-react)
+- **Icons**: Icon Park (@icon-park/react)
+- **CSS**: UnoCSS atomic styles
+- **State Management**: React Context (AuthContext / ConversationContext / ThemeContext / LayoutContext)
+- **IPC Communication**: @office-ai/platform bridge system
+- **Internationalization**: i18next + react-i18next
+- **Database**: better-sqlite3
+
+### 2.2 Naming Conventions
+
+| Type          | Convention            | Example                                         |
+| ------------- | --------------------- | ----------------------------------------------- |
+| React Component | PascalCase          | `MessageList.tsx`, `FilePreview.tsx`            |
+| Hooks         | `use` prefix + PascalCase | `useAutoScroll.ts`, `useColorScheme.ts`    |
+| Bridge files  | featureName + Bridge  | `conversationBridge.ts`, `databaseBridge.ts`    |
+| Service files | featureName + Service | `WebuiService.ts`                               |
+| Interface types | `I` prefix          | `ICreateConversationParams`, `IResponseMessage` |
+| Type aliases  | `T` prefix or direct name | `TChatConversation`, `PresetAgentType`      |
+| Constants     | UPPER_SNAKE_CASE      | `MAX_RETRY_COUNT`                               |
+| Utility functions | camelCase         | `formatMessage`, `parseResponse`                |
+
+### 2.3 File Placement Rules
+
+```
+New files should be placed in the corresponding directory:
 
 src/
-├── agent/                        # AI 代理实现
-│   ├── acp/                      # ACP 协议代理
-│   ├── codex/                    # Codex 代理
-│   └── gemini/                   # Gemini 代理
+├── agent/                        # AI agent implementations
+│   ├── acp/                      # ACP protocol agent
+│   ├── codex/                    # Codex agent
+│   └── gemini/                   # Gemini agent
 │
-├── common/                       # 跨进程共享模块
-│   ├── adapters/                 # API 适配器
-│   ├── types/                    # 共享类型定义
-│   └── utils/                    # 共享工具函数
+├── common/                       # Cross-process shared modules
+│   ├── adapters/                 # API adapters
+│   ├── types/                    # Shared type definitions
+│   └── utils/                    # Shared utility functions
 │
-├── process/                      # Electron 主进程
-│   ├── bridge/                   # IPC 桥接定义 (24+ 个)
-│   ├── database/                 # SQLite 数据库操作
-│   ├── services/                 # 业务逻辑服务
-│   └── task/                     # 任务管理
+├── process/                      # Electron main process
+│   ├── bridge/                   # IPC bridge definitions (24+)
+│   ├── database/                 # SQLite database operations
+│   ├── services/                 # Business logic services
+│   └── task/                     # Task management
 │
-├── renderer/                     # React 渲染进程
-│   ├── components/               # 可复用 UI 组件
-│   │   └── base/                 # 基础组件
-│   ├── context/                  # React Context 状态
-│   ├── hooks/                    # 自定义 Hooks (31+)
-│   ├── pages/                    # 页面组件
-│   │   ├── conversation/         # 对话页面
-│   │   │   ├── preview/          # 预览面板
-│   │   │   └── workspace/        # 工作区
-│   │   ├── settings/             # 设置页面 (12+)
-│   │   └── login/                # 登录页面
-│   ├── messages/                 # 消息渲染组件
-│   ├── i18n/locales/             # 国际化文本
-│   ├── services/                 # 前端服务
-│   └── utils/                    # 前端工具函数
+├── renderer/                     # React renderer process
+│   ├── components/               # Reusable UI components
+│   │   └── base/                 # Base components
+│   ├── context/                  # React Context state
+│   ├── hooks/                    # Custom hooks (31+)
+│   ├── pages/                    # Page components
+│   │   ├── conversation/         # Conversation page
+│   │   │   ├── preview/          # Preview panel
+│   │   │   └── workspace/        # Workspace
+│   │   ├── settings/             # Settings pages (12+)
+│   │   └── login/                # Login page
+│   ├── messages/                 # Message rendering components
+│   ├── i18n/locales/             # Internationalization text
+│   ├── services/                 # Frontend services
+│   └── utils/                    # Frontend utility functions
 │
-├── webserver/                    # Web 服务器 (WebUI 模式)
-│   ├── routes/                   # API 路由
-│   └── middleware/               # 中间件
+├── webserver/                    # Web server (WebUI mode)
+│   ├── routes/                   # API routes
+│   └── middleware/               # Middleware
 │
 ├── worker/                       # Web Worker
 │
-└── types/                        # 全局类型定义
+└── types/                        # Global type definitions
 ```
 
-### 2.4 代码风格 (Prettier 配置)
+### 2.4 Code Style (Prettier Configuration)
 
 ```json
 {
-  "semi": true, // 使用分号
-  "singleQuote": true, // 使用单引号
-  "jsxSingleQuote": true, // JSX 使用单引号
-  "trailingComma": "es5", // ES5 兼容的尾随逗号
-  "tabWidth": 2, // 2 空格缩进
-  "useTabs": false, // 不使用 Tab
-  "bracketSpacing": true, // 括号内空格
-  "arrowParens": "always", // 箭头函数始终括号
-  "endOfLine": "lf" // Unix 换行符
+  "semi": true, // use semicolons
+  "singleQuote": true, // use single quotes
+  "jsxSingleQuote": true, // JSX uses single quotes
+  "trailingComma": "es5", // ES5-compatible trailing commas
+  "tabWidth": 2, // 2-space indentation
+  "useTabs": false, // do not use tabs
+  "bracketSpacing": true, // spaces inside brackets
+  "arrowParens": "always", // always parenthesize arrow function params
+  "endOfLine": "lf" // Unix line endings
 }
 ```
 
-### 2.5 质量要求
+### 2.5 Quality Requirements
 
-- [ ] TypeScript 类型完整，避免使用 `any`
-- [ ] 使用 bridge 系统进行 IPC 通信
-- [ ] 实现错误边界处理
-- [ ] 支持国际化 (使用 i18next 的 `t()` 函数)
-- [ ] 深色/浅色主题兼容
-- [ ] 响应式布局适配
+- [ ] TypeScript types are complete — avoid using `any`
+- [ ] Use the bridge system for IPC communication
+- [ ] Implement error boundary handling
+- [ ] Support internationalization (use i18next `t()` function)
+- [ ] Compatible with dark / light themes
+- [ ] Responsive layout support
 
-### 2.6 禁止事项
+### 2.6 Prohibited Practices
 
-- ❌ 直接使用 `ipcMain` / `ipcRenderer`，必须通过 bridge 系统
-- ❌ 在渲染进程直接访问 Node.js API
-- ❌ 硬编码中文/英文文本，需使用 i18n key
-- ❌ 使用内联样式，应使用 UnoCSS 类名
-- ❌ 在组件中直接操作 DOM，使用 React ref
-- ❌ 忽略 TypeScript 错误 (`@ts-ignore`)
+- ❌ Direct use of `ipcMain` / `ipcRenderer` — must go through the bridge system
+- ❌ Accessing Node.js APIs directly in the renderer process
+- ❌ Hardcoding Chinese/English text — use i18n keys
+- ❌ Using inline styles — use UnoCSS class names
+- ❌ Directly manipulating the DOM in components — use React ref
+- ❌ Suppressing TypeScript errors (`@ts-ignore`)
 
 ---
 
